@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StatsdClient\Telegraf.csproj">
-      <Project>{77B1707A-9123-4CD9-9A18-A8D7F4794D71}</Project>
+      <Project>{0a57752c-273c-47d5-94dc-80bb2f39612e}</Project>
       <Name>Telegraf</Name>
     </ProjectReference>
   </ItemGroup>

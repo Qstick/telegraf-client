@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegraf;
 
-namespace TesterTool
-{
+namespace TesterTool {
 	class Program
 	{
 		static void Main(string[] args) {
@@ -19,22 +16,21 @@ namespace TesterTool
 
 			while (true) {
 				Metrics.RecordCount("test", 1, new Dictionary<string, string>() {
-				{ "tag","bingo"}
-			});
+					{ "tag","bingo"}
+				});
 				Metrics.RecordValue("test", 1, new Dictionary<string, string>() {
-				{"tag","bongo" }
-			});
+					{"tag","bongo" }
+				});
 
 				Metrics.Record("test", new Dictionary<string, object>() {
-				{"value1", 2 },
-				{"value2", 3 },
-				{"tag", "bingo2" }
-			});
+					{"value1", 2 },
+					{"value2", 3 },
+					{"tag", "bingo2" }
+				});
+
 				Console.WriteLine("Write to continue");
 				Console.ReadLine();
 			}
-
-			
 		}
 	}
 }
