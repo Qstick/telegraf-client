@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Telegraf {
 
@@ -61,47 +59,73 @@ namespace Telegraf {
 
 
 		/// <summary>
-		/// Set the gauge to the given absolute value.
+		/// Record a given value as single 'value' property.
 		/// </summary>
 		/// <param name="measurement">Name of the metric.</param>
-		/// <param name="value">Absolute value of the gauge to set.</param>
-		public static void RecordValue(string measurement, object value, 
-			Dictionary<string,string> tags=null, 
-			int sampleRate = 1) {
+		/// <param name="value">Value to set as 'value' property.</param>
+		/// <param name="tags">Dictionary of key/values to store.</param>
+		/// <param name="sampleRate">Sample rate to reduce the load on your metric server. Defaults to 1 (100%).</param>
+		public static void RecordValue(string measurement, object value, Dictionary<string,string> tags = null, int sampleRate = 1) {
 			if (!Sampler(sampleRate)) {
 				return;
 			}
+
+			if (tags == null) {
+				tags = new Dictionary<string, string>();
+			}
+
+			// Ensure the entry is always unique
+			tags.Add("__guid", Guid.NewGuid().ToString());
+
 			var values = new Dictionary<string, object> { { "value", value } };
 			var point = new InfluxPoint(measurement, values, tags);
 			_statsD.Send(point);
 		}
 
-		public static void Record(string measurement, 
-			Dictionary<string,object> values,
-			Dictionary<string, string> tags = null,
-			int sampleRate = 1)
-		{
+		/// <summary>
+		/// Record the given values
+		/// </summary>
+		/// <param name="measurement">Name of the metric.</param>
+		/// <param name="values">Dictionary of key/values to set.</param>
+		/// <param name="tags">Dictionary of key/values to store with entry.</param>
+		/// <param name="sampleRate">Sample rate to reduce the load on your metric server. Defaults to 1 (100%).</param>
+		public static void Record(string measurement, Dictionary<string,object> values, Dictionary<string, string> tags = null, int sampleRate = 1) {
 			if (!Sampler(sampleRate))
 			{
 				return;
 			}
+
+			if (tags == null) {
+				tags = new Dictionary<string, string>();
+			}
+
+			// Ensure the entry is always unique
+			tags.Add("__guid", Guid.NewGuid().ToString());
+
 			var point = new InfluxPoint(measurement, values, tags);
 			_statsD.Send(point);
 		}
+
 		/// <summary>
 		/// Send a counter value.
 		/// </summary>
 		/// <param name="measurement">Name of the metric.</param>
-		/// <param name="value">Value of the counter. Defaults to 1.</param>
+		/// <param name="tags">Dictionary of key/values to store with entry.</param>
 		/// <param name="sampleRate">Sample rate to reduce the load on your metric server. Defaults to 1 (100%).</param>
-		public static void RecordCount(
-			string measurement, long count = 1, 
-			Dictionary<string,string> tags = null,
-			int sampleRate = 1) {
+		/// <param name="count">The integer value to store as 'count'.</param>
+		public static void RecordCount(string measurement, long count = 1, Dictionary<string,string> tags = null, int sampleRate = 1) {
 			if (!Sampler(sampleRate))
 			{
 				return;
 			}
+
+			if (tags == null) {
+				tags = new Dictionary<string, string>();
+			}
+
+			// Ensure the entry is always unique
+			tags.Add("__guid", Guid.NewGuid().ToString());
+
 			var values = new Dictionary<string, object> { { "count", count } };
 			var point = new InfluxPoint(measurement, values, tags);
 			_statsD.Send(point);
