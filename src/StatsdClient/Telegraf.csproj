@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
 	<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
         <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -14,6 +14,7 @@
         <Copyright></Copyright>
         <AssemblyName>Telegraf</AssemblyName>
         <RootNamespace>Telegraf</RootNamespace>
+        <PackageReleaseNotes>Added __guid to Record methods in Metrics to ensure each metric is unique.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
