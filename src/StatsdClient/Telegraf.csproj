@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
-    <Version>3.0.1</Version>
+    <Version>3.0.3</Version>
 	<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
         <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Company />
         <Authors />
         <PackageId>Telegraf</PackageId>
